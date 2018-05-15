@@ -1,4 +1,4 @@
-describe("Plane", function () {
+describe("Plane", function() {
   var plane;
 
   beforeEach(function() {
@@ -33,4 +33,4 @@ describe("Plane", function () {
     }).toThrowError("Plane already landed")
   });
 
-})
+});
