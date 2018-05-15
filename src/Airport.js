@@ -10,3 +10,14 @@ Airport.prototype.capacity = function() {
 Airport.prototype.hangar = function() {
   return this._hangar;
 }
+
+Airport.prototype.land = function(plane) {
+  plane.land();
+  this._hangar.push(plane);
+}
+
+Airport.prototype.takeOff = function(plane) {
+  plane.takeOff();
+  const index = this._hangar.indexOf(plane);
+  this._hangar.splice(index, 1);
+}
