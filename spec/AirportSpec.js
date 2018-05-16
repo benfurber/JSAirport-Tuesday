@@ -13,22 +13,24 @@ describe("Airport", function() {
   });
 
   it("On creation - the airport should have a default capacity of 97", function() {
+    airport._capacity = defaultCapacity;
     expect(airport.capacity()).toEqual(defaultCapacity);
   });
 
   it("On creation - has an empty array of planes", function() {
+    airport._hanger = [];
     expect(airport.hangar()).toEqual([]);
-  })
+  });
 
   it("should be able to change the capacity", function() {
+    airport._capacity = defaultCapacity;
     const newCapacity = 15
     airport.changeCapacity(newCapacity);
-    expect(airport.capacity()).toEqual(newCapacity);
-  })
+    expect(airport._capacity).toEqual(newCapacity);
+  });
 
   it("Planes can't land if the weather is bad", function() {
     weather.check.and.returnValue('bad');
-    plane.takeOff();
     expect(function() {
       airport.land(plane);
     }).toThrowError("Weather bad");
@@ -42,8 +44,7 @@ describe("Airport", function() {
   });
 
   it("It stores a plane in the hangar when plane lands", function() {
-    plane.takeOff();
-    airport.land(plane);
+    airport._hangar = [plane]
     expect(airport.hangar()).toContain(plane);
   });
 
@@ -75,10 +76,8 @@ describe("Airport", function() {
   });
 
   it("The plane is told to take-off when released", function() {
-    plane.takeOff();
-    airport.land(plane);
+    airport._hangar = [plane];
     airport.takeOff(plane);
     expect(plane.takeOff).toHaveBeenCalled();
-  })
-
+  });
 });
