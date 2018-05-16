@@ -18,7 +18,7 @@ describe("Plane", function() {
     plane.takeOff();
     expect(function() {
       plane.takeOff();
-    }).toThrowError("Plane already in the sky")
+    }).toThrowError("Plane already in the sky");
   });
 
   it("Should be able to land", function(){
@@ -30,7 +30,7 @@ describe("Plane", function() {
   it("Should return an error if already not in the air", function() {
     expect(function() {
       plane.land();
-    }).toThrowError("Plane already landed")
+    }).toThrowError("Plane already landed");
   });
 
 });
