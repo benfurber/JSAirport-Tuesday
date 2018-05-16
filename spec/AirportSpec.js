@@ -23,8 +23,8 @@ describe("Airport", function() {
   });
 
   it("should be able to change the capacity", function() {
-    airport._capacity = defaultCapacity;
     const newCapacity = 15
+    airport._capacity = defaultCapacity;
     airport.changeCapacity(newCapacity);
     expect(airport._capacity).toEqual(newCapacity);
   });
@@ -44,12 +44,12 @@ describe("Airport", function() {
   });
 
   it("It stores a plane in the hangar when plane lands", function() {
-    airport._hangar = [plane]
+    airport._hangar = [plane];
     expect(airport.hangar()).toContain(plane);
   });
 
   it("The plane is told to land when stored", function() {
-    plane.takeOff();
+    plane._flying = true;
     airport.land(plane);
     expect(plane.land).toHaveBeenCalled();
   });
@@ -69,10 +69,9 @@ describe("Airport", function() {
   });
 
   it("It releases a plane from the hangar when plane takes off", function() {
-    plane.takeOff();
-    airport.land(plane);
+    airport._hangar = [plane];
     airport.takeOff(plane);
-    expect(airport.hangar()).not.toContain(plane);
+    expect(airport._hangar).not.toContain(plane);
   });
 
   it("The plane is told to take-off when released", function() {
